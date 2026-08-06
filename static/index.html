@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Schoolhouse Camps & After-School Programs | Discover Local Programs</title>
+  <meta name="description" content="Discover curated summer camps and after-school programs for your kids near you. Natural language discovery, instant registration reminders, and local program cards." />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+
+  <!-- Header & Navigation -->
+  <header>
+    <div class="header-container">
+      <a href="#" class="brand-logo">
+        <div class="brand-icon">🏫</div>
+        <div>Schoolhouse <span class="accent">Camps</span></div>
+      </a>
+
+      <!-- Flexible Location Bar with IP Auto-Detection -->
+      <div class="location-bar">
+        <span>📍 Location:</span>
+        <input type="text" id="user-location-input" value="98101 - Seattle, WA" placeholder="Enter Zip Code or City (e.g. 98101, Seattle, 94103)" style="border:none; background:transparent; font-family:inherit; font-size:0.88rem; font-weight:700; color:var(--red-primary); outline:none; width:180px;" />
+        <button id="detect-ip-btn" class="btn btn-secondary" style="padding:0.25rem 0.65rem; font-size:0.78rem;" title="Auto-detect location from IP">📍 Detect IP</button>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#catalog-section" class="btn btn-secondary">Browse All Programs</a>
+        <button id="profile-nav-btn" class="btn btn-secondary">👤 My Profile</button>
+        <button id="admin-nav-btn" class="btn btn-outline-red">⚙️ Product Owner Dashboard</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+
+    <!-- Natural Language Hero Assistant -->
+    <section class="assistant-hero">
+      <div class="hero-content">
+        <div class="hero-tag">✨ AI Parent Assistant</div>
+        <h1>Find the best camps & after-school programs for your kids</h1>
+        <p>Describe what your child loves, your budget, or schedule requirements in plain English. We'll curate fresh programs nearby!</p>
+
+        <form id="chat-form" class="chat-input-box">
+          <input type="text" id="chat-input" placeholder="e.g. 'Looking for robotics, drama, or soccer in Seattle for my 8yo under $350/wk'" required />
+          <button type="submit" class="btn btn-primary">Discover Programs</button>
+        </form>
+
+        <div class="preset-pills">
+          <span class="preset-pill" data-query="Pacific science robotics & STEM in Seattle under $350">🤖 Seattle STEM & Robotics</span>
+          <span class="preset-pill" data-query="Seattle Childrens Theatre drama school">🎭 Children's Theatre & Drama</span>
+          <span class="preset-pill" data-query="Woodland Park Zoo wildlife ranger camp">🦁 Woodland Park Zoo Rangers</span>
+          <span class="preset-pill" data-query="Arena Sports soccer and parkour active camp">⚽ Soccer & Arena Sports</span>
+        </div>
+
+        <div id="assistant-response" class="assistant-response"></div>
+      </div>
+    </section>
+
+    <!-- Featured Horizontal Carousel Section (6 Cards) -->
+    <section class="carousel-wrapper">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">⭐ Featured Recommendations</h2>
+          <p id="carousel-subtitle" class="section-subtitle">Top curated programs sequenced from best fit to least fit</p>
+        </div>
+        <div class="carousel-controls">
+          <button id="carousel-left" class="carousel-arrow" aria-label="Previous cards">&lt;</button>
+          <button id="carousel-right" class="carousel-arrow" aria-label="Next cards">&gt;</button>
+        </div>
+      </div>
+
+      <!-- Horizontal Scroll Track -->
+      <div id="carousel-track" class="carousel-track">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+
+    <!-- Full Program Catalog Block -->
+    <section id="catalog-section" class="catalog-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">⛺ Complete Curated Program Catalog</h2>
+          <p id="catalog-count" class="section-subtitle">Showing 20+ programs within 25 miles</p>
+        </div>
+      </div>
+
+      <!-- Filter & Search Bar -->
+      <div class="filter-bar">
+        <button class="filter-btn active" data-category="all">All Categories</button>
+        <button class="filter-btn" data-category="STEM">STEM</button>
+        <button class="filter-btn" data-category="Arts">Arts</button>
+        <button class="filter-btn" data-category="Nature">Nature</button>
+        <button class="filter-btn" data-category="Sports">Sports</button>
+        <button class="filter-btn" data-category="After-School">After-School</button>
+
+        <div class="search-field">
+          🔍 <input type="text" id="catalog-search" placeholder="Search by name, activity, or provider..." />
+        </div>
+      </div>
+
+      <!-- Catalog Grid -->
+      <div id="catalog-grid" class="catalog-grid">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Program Details Modal / Page -->
+  <div id="detail-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header-nav">
+        <a id="back-to-catalog" class="back-link">&larr; View All Programs</a>
+        <button id="close-detail-modal" class="modal-close-btn">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <img id="modal-hero-img" src="" alt="Program Hero" class="modal-hero-img" />
+        
+        <h2 id="modal-title" class="modal-title">Program Title</h2>
+        <div id="modal-organizer" class="modal-organizer">Organizer Name</div>
+
+        <div class="modal-details-grid">
+          <div class="detail-item">
+            <h4>Program Cost</h4>
+            <p id="modal-cost">$0</p>
+          </div>
+          <div class="detail-item">
+            <h4>Age Group</h4>
+            <p id="modal-age">5-12 yrs</p>
+          </div>
+          <div class="detail-item">
+            <h4>Registration Date</h4>
+            <p id="modal-reg-date">Aug 20, 2026</p>
+          </div>
+          <div class="detail-item">
+            <h4>Session Schedule</h4>
+            <p id="modal-session-dates">Aug 24 - Aug 28</p>
+          </div>
+        </div>
+
+        <h3>About This Program</h3>
+        <p id="modal-description" class="modal-description">Program detailed paragraph description...</p>
+
+        <p style="margin-bottom: 1.5rem;">
+          🌐 <strong>Official Website:</strong> <a id="modal-website-link" href="#" target="_blank" rel="noopener">Visit Program Page &rarr;</a>
+        </p>
+
+        <!-- Set Email Reminder Form -->
+        <div class="reminder-box">
+          <h3>🔔 Set a Registration Reminder</h3>
+          <p>Get an email notification before registration opens so you never miss a spot for your child.</p>
+
+          <form id="reminder-form" class="reminder-form">
+            <input type="email" id="reminder-email" placeholder="Enter your email address" required />
+            <button type="submit" class="btn btn-primary">Notify Me</button>
+          </form>
+          <div id="reminder-message" style="margin-top:0.75rem; display:none;"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Parent Profile Modal -->
+  <div id="profile-modal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 560px;">
+      <div class="modal-header-nav">
+        <h2 style="font-family: var(--font-heading); font-weight: 800;">👤 Parent Profile</h2>
+        <button id="close-profile-modal" class="modal-close-btn">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="profile-form">
+          <div class="form-group">
+            <label for="profile-email">Email Address</label>
+            <input type="email" id="profile-email" required />
+          </div>
+
+          <div class="form-group">
+            <label for="profile-parent-name">Parent Name</label>
+            <input type="text" id="profile-parent-name" placeholder="e.g. Sarah Jenkins" />
+          </div>
+
+          <div class="form-group" style="display: flex; gap: 1rem;">
+            <div style="flex: 2;">
+              <label for="profile-kid-name">Kid's Name</label>
+              <input type="text" id="profile-kid-name" placeholder="e.g. Maya" />
+            </div>
+            <div style="flex: 1;">
+              <label for="profile-kid-age">Kid's Age</label>
+              <input type="number" id="profile-kid-age" min="3" max="17" value="8" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="profile-zip">Zip Code / Location</label>
+            <input type="text" id="profile-zip" value="98101" />
+          </div>
+
+          <div class="form-group">
+            <label for="profile-reqs">Program Preferences / Notes</label>
+            <input type="text" id="profile-reqs" placeholder="e.g. Half-day STEM or art camps with extended care option" />
+          </div>
+
+          <div class="form-group">
+            <label>Notification Preferences</label>
+            <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.25rem;">
+              <label style="font-weight:500; font-size:0.9rem;"><input type="checkbox" id="pref-email" checked /> Email reminders when registration opens</label>
+              <label style="font-weight:500; font-size:0.9rem;"><input type="checkbox" id="pref-sms" /> SMS alerts for high-demand camp openings</label>
+              <label style="font-weight:500; font-size:0.9rem;"><input type="checkbox" id="pref-digest" checked /> Weekly digest of new local programs</label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Save Profile Settings</button>
+        </form>
+
+        <hr style="margin: 1.5rem 0; border: none; border-top: 1px solid var(--border-light);" />
+
+        <h3>Your Saved Registration Reminders</h3>
+        <div id="saved-reminders-list" style="margin-top: 0.75rem;">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Owner Admin Dashboard Modal -->
+  <div id="admin-modal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 820px;">
+      <div class="modal-header-nav">
+        <h2 style="font-family: var(--font-heading); font-weight: 800;">⚙️ Product Owner Dashboard</h2>
+        <button id="close-admin-modal" class="modal-close-btn">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        
+        <!-- Admin Login View -->
+        <div id="admin-login-view">
+          <p style="margin-bottom: 1rem; color: var(--text-muted);">Please enter the Product Owner Password to access key health metrics, funnel analytics, and team management.</p>
+          <form id="admin-login-form" style="display: flex; gap: 0.5rem; max-width: 420px;">
+            <input type="password" id="admin-password" placeholder="Enter admin password (e.g. schoolhouse2026)" required style="flex:1; padding:0.75rem; border-radius:var(--radius-sm); border:1px solid var(--border-light);" />
+            <button type="submit" class="btn btn-primary">Login</button>
+          </form>
+          <div id="admin-login-error" style="color: var(--red-primary); font-size:0.88rem; margin-top:0.5rem;"></div>
+        </div>
+
+        <!-- Admin Dashboard Analytics View -->
+        <div id="admin-dashboard-view" style="display: none;">
+          <h3 style="margin-bottom: 1rem; color: var(--red-primary);">Product Health & Engagement Overview</h3>
+
+          <div class="admin-grid">
+            <div class="metric-card">
+              <h3>AI Searches & Queries</h3>
+              <div id="metric-searches" class="value">0</div>
+            </div>
+            <div class="metric-card">
+              <h3>Card Click Impressions</h3>
+              <div id="metric-clicks" class="value">0</div>
+            </div>
+            <div class="metric-card">
+              <h3>Reminders Set</h3>
+              <div id="metric-reminders" class="value">0</div>
+            </div>
+            <div class="metric-card">
+              <h3>Parent Profiles</h3>
+              <div id="metric-users" class="value">0</div>
+            </div>
+          </div>
+
+          <h3>Conversion Funnel Analytics</h3>
+          <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:1rem;">Parent user journey progression from discovery to profile creation:</p>
+          <div id="funnel-container" style="margin-bottom: 2rem;">
+            <!-- Rendered dynamically -->
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+            <div>
+              <h3>Team Collaborators</h3>
+              <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.5rem;">Product owner and authorized team members:</p>
+              <ul id="collaborators-list" style="margin-left: 1.25rem; font-size: 0.9rem; margin-bottom:1rem;">
+                <!-- Rendered dynamically -->
+              </ul>
+            </div>
+
+            <div>
+              <h3>System Architecture & Extensibility</h3>
+              <div style="background:var(--bg-warm); padding:1rem; border-radius:var(--radius-md); font-size:0.85rem; border:1px solid var(--border-light);">
+                <strong>Extensible Design:</strong>
+                <ul style="margin-left:1rem; margin-top:0.5rem;">
+                  <li>Multi-region location detection (Seattle, San Francisco, & custom zip codes)</li>
+                  <li>Freshness policy: Registration dates strictly +1 to +90 days</li>
+                  <li>Proximity policy: Hard filter &lt;= 25 miles from user location</li>
+                  <li>Ready for Auto-Registration Agent extensions</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 <strong>Schoolhouse Camps</strong> • Discover summer camps & after-school programs. Built for parents with ❤️</p>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

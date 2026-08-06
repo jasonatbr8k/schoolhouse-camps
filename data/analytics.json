@@ -1,0 +1,36 @@
+{
+  "searches_count": 148,
+  "card_clicks": 393,
+  "reminders_set": 57,
+  "profiles_created": 41,
+  "active_collaborators": [
+    "owner@schoolhouse.com"
+  ],
+  "funnel": {
+    "impressions": 1250,
+    "searches": 142,
+    "card_clicks": 393,
+    "detail_views": 214,
+    "reminders_set": 57,
+    "profiles_created": 41
+  },
+  "top_categories": {
+    "STEM": 58,
+    "Arts": 34,
+    "Nature": 29,
+    "Sports": 21,
+    "After-School": 18
+  },
+  "recent_searches": [
+    "i need an after-school program for my second grader who goes to school in capital hill but lives in magnolia. my kid likes performing arts, as well as obstacle courses (Seattle, WA)",
+    "Pacific science robotics & STEM in Seattle under $350 (Seattle, WA)",
+    "Seattle Childrens Theatre drama school (Seattle, WA)",
+    "i want an after-school program for my second grader who likes performance arts but also obstacle courses. we live in seattle",
+    "looking for claymation pottery arts in SoMa",
+    "I need an afterschool program for my second grader who likes performing arts but also active things like obstacle courses. we live in 98199",
+    "STEM camps under $350 for 8yo",
+    "Art and clay after school",
+    "Outdoor nature ranger near Presidio",
+    "Soccer and multi-sport camp"
+  ]
+}
